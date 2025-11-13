@@ -248,7 +248,10 @@ INSERT INTO autor (au_nome, au_pais) VALUES
 ('Gabriel García Márquez', 'Colômbia'),
 ('Mario Vargas Llosa', 'Peru'),
 ('Isabel Allende', 'Chile')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (au_nome) DO NOTHING;
+
+-- Remover constraint de ano se existir (para permitir livros antigos)
+ALTER TABLE livro DROP CONSTRAINT IF EXISTS livro_li_ano_check;
 
 -- Inserir livros de exemplo
 INSERT INTO livro (li_titulo, li_ano, li_edicao, li_isbn, li_editora, li_autor, li_genero) VALUES
@@ -311,7 +314,7 @@ INSERT INTO utente (ut_nome, ut_nif, ut_email, ut_tlm, ut_morada, ut_cod_postal)
 ('Ricardo Pereira', '890123456', 'ricardo.pereira@email.com', '989012345', 'Rua de São Bento, 258', '1000-002'),
 ('Teresa Almeida', '901234567', 'teresa.almeida@email.com', '990123456', 'Praça dos Restauradores, 369', '1000-001'),
 ('Carlos Ribeiro', '012345678', 'carlos.ribeiro@email.com', '901234567', 'Rua das Flores, 741', '1000-002')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (ut_email) DO NOTHING;
 
 -- Inserir empréstimos de exemplo
 INSERT INTO requisicao (re_ut_cod, re_lex_cod, re_data_requisicao, re_data_prevista, re_data_devolucao) VALUES

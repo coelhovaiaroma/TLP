@@ -72,8 +72,8 @@ export interface CodigoPostal {
 }
 
 // Configuração do cliente Supabase
-const supabaseUrl = 'https://xwmtuvdyhmnicutsumke.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3bXR1dmR5aG1uaWN1dHN1bWtlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkyMzc0NzgsImV4cCI6MjA3NDgxMzQ3OH0.SrrI87xSOpwWJo_4D5-VrqBn8eZ-lOrTxGqLl3eJxCU';
+const supabaseUrl = 'https://fhlbhqrqdbifyjpldzun.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZobGJocXJxZGJpZnlqcGxkenVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwNDQ3NTgsImV4cCI6MjA3ODYyMDc1OH0.dh_92vFL_JiuYgKZbhfMKNbUV_G9x1iGVv3rBPTaaTE';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 

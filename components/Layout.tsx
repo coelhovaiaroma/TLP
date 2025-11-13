@@ -15,8 +15,6 @@ interface LayoutProps {
 export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: LayoutProps) {
   const router = useRouter();
   const [currentTime, setCurrentTime] = useState('');
-  const [fontSize, setFontSize] = useState(18);
-  const [isHighContrast, setIsHighContrast] = useState(false);
 
   // Atualizar horário
   useEffect(() => {
@@ -36,25 +34,6 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
     const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
   }, []);
-
-  // Funções de acessibilidade
-  const increaseFontSize = () => {
-    const newSize = Math.min(fontSize + 2, 24);
-    setFontSize(newSize);
-    document.documentElement.style.setProperty('--font-size-base', newSize + 'px');
-  };
-
-  const decreaseFontSize = () => {
-    const newSize = Math.max(fontSize - 2, 14);
-    setFontSize(newSize);
-    document.documentElement.style.setProperty('--font-size-base', newSize + 'px');
-  };
-
-  const toggleHighContrast = () => {
-    const newContrast = !isHighContrast;
-    setIsHighContrast(newContrast);
-    document.body.classList.toggle('high-contrast', newContrast);
-  };
 
   const showHelp = () => {
     const helpContent = `
@@ -78,7 +57,7 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
         <li>Empréstimos em atraso são destacados na página inicial</li>
       </ul>
     `;
-    
+
     // Criar modal de ajuda
     const modal = document.createElement('div');
     modal.className = 'modal fade';
@@ -98,11 +77,11 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
         </div>
       </div>
     `;
-    
+
     document.body.appendChild(modal);
     const bsModal = new (window as any).bootstrap.Modal(modal);
     bsModal.show();
-    
+
     // Remover modal do DOM após fechar
     modal.addEventListener('hidden.bs.modal', () => {
       modal.remove();
@@ -111,41 +90,16 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
 
   return (
     <>
-      {/* Barra de Acessibilidade */}
-      <div className="accessibility-bar">
+      {/* Barra de Acessibilidade Moderna */}
+      <div className="accessibility-bar bg-white border-bottom shadow-sm">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="accessibility-controls">
-                  <button 
-                    type="button" 
-                    className="btn btn-sm btn-outline-primary me-2" 
-                    onClick={increaseFontSize}
-                    aria-label="Aumentar tamanho da fonte"
-                    disabled={fontSize >= 24}
-                  >
-                    <i className="fas fa-plus"></i> A+
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-sm btn-outline-primary me-2" 
-                    onClick={decreaseFontSize}
-                    aria-label="Diminuir tamanho da fonte"
-                    disabled={fontSize <= 14}
-                  >
-                    <i className="fas fa-minus"></i> A-
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-sm btn-outline-secondary" 
-                    onClick={toggleHighContrast}
-                    aria-label="Alternar alto contraste"
-                  >
-                    <i className="fas fa-adjust"></i> {isHighContrast ? '☀️ Normal' : '🌙 Contraste'}
-                  </button>
+              <div className="d-flex justify-content-between align-items-center py-2">
+                <div className="accessibility-controls d-flex gap-2">
                 </div>
-                <div className="current-time">
+                <div className="current-time text-muted fw-medium">
+                  <i className="fas fa-clock me-1"></i>
                   <span>{currentTime}</span>
                 </div>
               </div>
@@ -161,19 +115,19 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
             <i className="fas fa-book me-2"></i>
             Biblioteca Escolar
           </Link>
-          
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" 
-            aria-controls="navbarNav" 
-            aria-expanded="false" 
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
             aria-label="Alternar navegação"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          
+
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
@@ -212,12 +166,12 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
                 </Link>
               </li>
             </ul>
-            
+
             <ul className="navbar-nav">
               <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link" 
-                  onClick={showHelp} 
+                <button
+                  className="nav-link btn btn-link"
+                  onClick={showHelp}
                   title="Ajuda"
                   style={{ border: 'none', background: 'none' }}
                 >
