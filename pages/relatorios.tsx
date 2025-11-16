@@ -177,7 +177,7 @@ export default function RelatoriosPage() {
                 <div className="display-4 text-primary">
                   <i className="fas fa-book"></i>
                 </div>
-                <h5 className="card-title">Total de Livros</h5>
+                <h5 className="card-title text-white">Total de Livros</h5>
                 <h2 className="text-primary">{estatisticas.totalLivros}</h2>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function RelatoriosPage() {
                 <div className="display-4 text-success">
                   <i className="fas fa-book-open"></i>
                 </div>
-                <h5 className="card-title">Exemplares Disponíveis</h5>
+                <h5 className="card-title text-white">Exemplares Disponíveis</h5>
                 <h2 className="text-success">{estatisticas.exemplaresDisponiveis}</h2>
               </div>
             </div>
@@ -201,7 +201,7 @@ export default function RelatoriosPage() {
                 <div className="display-4 text-warning">
                   <i className="fas fa-book-reader"></i>
                 </div>
-                <h5 className="card-title">Emprestados</h5>
+                <h5 className="card-title text-white">Emprestados</h5>
                 <h2 className="text-warning">{estatisticas.exemplaresEmprestados}</h2>
               </div>
             </div>
@@ -213,7 +213,7 @@ export default function RelatoriosPage() {
                 <div className="display-4 text-info">
                   <i className="fas fa-users"></i>
                 </div>
-                <h5 className="card-title">Utentes</h5>
+                <h5 className="card-title text-white">Utentes</h5>
                 <h2 className="text-info">{estatisticas.totalUtentes}</h2>
               </div>
             </div>
@@ -231,11 +231,11 @@ export default function RelatoriosPage() {
               <div className="row text-center">
                 <div className="col-6">
                   <h3 className="text-primary">{estatisticas?.emprestimosAtivos || 0}</h3>
-                  <p className="text-muted">Total Ativo</p>
+                  <p className="text-muted text-white">Total Ativo</p>
                 </div>
                 <div className="col-6">
                   <h3 className="text-danger">{estatisticas?.emprestimosAtraso || 0}</h3>
-                  <p className="text-muted">Em Atraso</p>
+                  <p className="text-muted text-white">Em Atraso</p>
                 </div>
               </div>
             </div>
@@ -245,17 +245,17 @@ export default function RelatoriosPage() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-header">
-              <h5>Status dos Exemplares</h5>
+              <h5 className="text-white">Status dos Exemplares</h5>
             </div>
             <div className="card-body">
               <div className="row text-center">
                 <div className="col-6">
                   <h3 className="text-success">{estatisticas?.exemplaresDisponiveis || 0}</h3>
-                  <p className="text-muted">Disponíveis</p>
+                  <p className="text-muted text-white">Disponíveis</p>
                 </div>
                 <div className="col-6">
                   <h3 className="text-warning">{estatisticas?.exemplaresEmprestados || 0}</h3>
-                  <p className="text-muted">Emprestados</p>
+                  <p className="text-muted text-white">Emprestados</p>
                 </div>
               </div>
             </div>

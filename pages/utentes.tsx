@@ -203,7 +203,7 @@ export default function UtentesPage() {
       <div className="row mt-4">
         <div className="col-12">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h3>Lista de Utentes</h3>
+            <h3 style={{ color: '#000000' }}>Lista de Utentes</h3>
             <button className="btn btn-primary" onClick={handleNewUser}>
               <i className="fas fa-plus"></i> Novo Utente
             </button>
