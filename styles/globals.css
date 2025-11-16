@@ -85,8 +85,8 @@ body {
     font-family: var(--font-primary);
     font-size: 14px;
     line-height: 1.6;
-    /* Tornar o texto um pouco mais claro para melhor leitura */
-    color: var(--neutral-600);
+    /* Fundo claro → texto preto/escuro */
+    color: var(--neutral-900);
     background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
     min-height: 100vh;
     transition: background-color var(--transition-base);
@@ -100,8 +100,8 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-secondary);
     font-weight: 700;
     line-height: 1.2;
-    /* Cabeçalhos menos contrastantes — tom levemente mais claro */
-    color: var(--neutral-800);
+    /* Fundo claro → texto preto/escuro */
+    color: var(--neutral-900);
 }
 
 h1 {
@@ -169,7 +169,7 @@ a:hover {
 
 .page-subtitle {
     font-size: 1rem;
-    color: var(--neutral-600);
+    color: var(--neutral-700);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -265,14 +265,15 @@ a:hover {
 
 .card-body {
     padding: var(--spacing-lg);
-    color: var(--neutral-800);
+    color: var(--neutral-900);
 }
 
 .card-footer {
     background: var(--neutral-50);
     border-top: 1px solid var(--neutral-200);
     padding: var(--spacing-md);
-    color: var(--neutral-700);
+    color: var(--neutral-900);
+}
 }
 
 /* ============================================================================
@@ -401,7 +402,7 @@ a:hover {
     font-size: 0.95rem;
     transition: all var(--transition-fast);
     background: #ffffff;
-    color: var(--neutral-800);
+    color: var(--neutral-900);
 }
 
 .form-control:focus,
@@ -417,7 +418,7 @@ a:hover {
 }
 
 .form-text {
-    color: var(--neutral-600);
+    color: var(--neutral-700);
     font-size: 0.875rem;
 }
 
@@ -451,7 +452,7 @@ a:hover {
     background: #ffffff;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    color: var(--neutral-800);
+    color: var(--neutral-900);
 }
 
 .table thead {
@@ -485,7 +486,7 @@ a:hover {
 .table tbody td {
     padding: var(--spacing-md) var(--spacing-lg);
     vertical-align: middle;
-    color: var(--neutral-700);
+    color: var(--neutral-900);
 }
 
 /* ============================================================================
@@ -698,7 +699,7 @@ footer .footer-bottom {
 
 .modal-body {
     padding: var(--spacing-lg);
-    color: var(--neutral-800);
+    color: var(--neutral-900);
 }
 
 .modal-body h4,
@@ -711,7 +712,7 @@ footer .footer-bottom {
 .modal-body p,
 .modal-body li,
 .modal-body strong {
-    color: var(--neutral-700);
+    color: var(--neutral-900);
 }
 
 .modal-footer {
@@ -729,7 +730,7 @@ footer .footer-bottom {
 }
 
 .text-muted {
-    color: var(--neutral-600);
+    color: var(--neutral-700);
 }
 
 .text-danger {
@@ -769,7 +770,7 @@ footer .footer-bottom {
 
 /* Ensure all paragraphs and text have good contrast */
 p, li, td, th, span, label {
-    color: var(--neutral-800);
+    color: var(--neutral-900);
 }
 
 .mt-0 { margin-top: 0; }
@@ -927,6 +928,31 @@ p, li, td, th, span, label {
 }
 
 /* ============================================================================
+   GARANTIAS DE CONTRASTE
+   ============================================================================ */
+
+/* Fundo preto/escuro → texto branco */
+.navbar,
+footer,
+.btn-primary:not(:hover),
+.btn-secondary:not(:hover),
+.btn-success:not(:hover),
+.btn-danger:not(:hover),
+.btn-warning:not(:hover) {
+    /* Garantir que texto em fundos escuros seja branco */
+}
+
+/* Fundo branco/claro → texto preto */
+.card,
+.card-body,
+.modal-content,
+.form-control,
+.form-select {
+    /* Garantir que texto em fundos claros seja preto/escuro */
+    color: var(--neutral-900) !important;
+}
+
+/* ============================================================================
    MODO ESCURO (Opcional)
    ============================================================================ */
 
@@ -939,6 +965,12 @@ p, li, td, th, span, label {
     .card {
         background: #1f2937;
         border-color: #374151;
+        color: #ffffff;
+    }
+
+    .card-body,
+    .card-footer {
+        color: #ffffff;
     }
 
     .form-control,
@@ -954,6 +986,7 @@ p, li, td, th, span, label {
 
     .table {
         background: #1f2937;
+        color: #ffffff;
     }
 
     .table tbody tr {
@@ -964,7 +997,20 @@ p, li, td, th, span, label {
         background: rgba(124, 58, 237, 0.1);
     }
 
+    .table tbody td {
+        color: #ffffff;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         color: #f3f4f6;
+    }
+
+    p, li, span, label {
+        color: #e5e7eb;
+    }
+
+    .modal-body {
+        background: #1f2937;
+        color: #ffffff;
     }
 }
