@@ -36,58 +36,7 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
     return () => clearInterval(interval);
   }, []);
 
-  const showHelp = () => {
-    const helpContent = `
-      <h4>Ajuda - Biblioteca Escolar</h4>
-      <p><strong>Navegação:</strong></p>
-      <ul>
-        <li>Use os botões grandes para navegar entre as seções</li>
-        <li>Use os controles no topo para ajustar fonte e contraste</li>
-        <li>Pressione Tab para navegar pelos elementos</li>
-      </ul>
-      <p><strong>Funcionalidades:</strong></p>
-      <ul>
-        <li><strong>Buscar Livros:</strong> Digite o título, autor ou ISBN</li>
-        <li><strong>Empréstimos:</strong> Selecione usuário e exemplar disponível</li>
-        <li><strong>Devoluções:</strong> Encontre o empréstimo e registre a devolução</li>
-      </ul>
-      <p><strong>Dicas:</strong></p>
-      <ul>
-        <li>Livros disponíveis aparecem em verde</li>
-        <li>Livros emprestados aparecem em vermelho</li>
-        <li>Empréstimos em atraso são destacados na página inicial</li>
-      </ul>
-    `;
 
-    // Criar modal de ajuda
-    const modal = document.createElement('div');
-    modal.className = 'modal fade';
-    modal.innerHTML = `
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Ajuda</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            ${helpContent}
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-    const bsModal = new (window as any).bootstrap.Modal(modal);
-    bsModal.show();
-
-    // Remover modal do DOM após fechar
-    modal.addEventListener('hidden.bs.modal', () => {
-      modal.remove();
-    });
-  };
 
   return (
     <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
@@ -232,25 +181,7 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
               </li>
             </ul>
 
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <button
-                  className="nav-link"
-                  onClick={showHelp}
-                  title="Ajuda"
-                  style={{
-                    border: 'none',
-                    background: 'none',
-                    color: '#ffffff',
-                    fontWeight: '500',
-                    padding: '0.5rem 1rem',
-                    cursor: 'pointer'
-                  }}
-                >
-                  ❓ Ajuda
-                </button>
-              </li>
-            </ul>
+
           </div>
         </div>
       </nav>
