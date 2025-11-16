@@ -265,7 +265,7 @@ a:hover {
 
 .card-body {
     padding: var(--spacing-lg);
-    color: var(--neutral-900);
+    color: var(--neutral-900) !important;
 }
 
 .card-footer {
@@ -754,7 +754,7 @@ footer .footer-bottom {
 
 /* Card title (títulos dentro de cards) */
 .card-title {
-    color: var(--neutral-900);
+    color: var(--neutral-900) !important;
     font-weight: 600;
 }
 
@@ -769,7 +769,7 @@ footer .footer-bottom {
 
 /* Ensure all paragraphs and text have good contrast */
 p, li, td, th, span, label {
-    color: var(--neutral-900);
+    color: var(--neutral-900) !important;
 }
 
 .mt-0 { margin-top: 0; }
