@@ -1,6 +1,6 @@
 /**
  * livros.tsx - Página de busca de livros
- * Convertido de livros.php para Next.js com Supabase
+ * NOVO DESIGN MODERNO - Mantém toda lógica funcional intacta
  */
 
 import React, { useState, useEffect } from 'react';
@@ -45,7 +45,6 @@ export default function LivrosPage() {
       setSearchTerm(term);
       searchBooks(term, page);
     } else if (router.isReady) {
-      // Carregar todos os livros se não houver busca
       loadAllBooks();
     }
   }, [router.query, router.isReady]);
@@ -107,232 +106,426 @@ export default function LivrosPage() {
     }
   };
 
-  const formatDate = (date: string): string => {
-    try {
-      return new Date(date).toLocaleDateString('pt-BR');
-    } catch {
-      return 'Data inválida';
-    }
-  };
-
   return (
     <Layout pageTitle="Buscar Livros - Biblioteca Escolar">
-      <div className="row">
-        <div className="col-12">
-          <h1 className="page-title">Buscar Livros</h1>
-          <p className="page-subtitle">Encontre o livro que você está procurando</p>
-        </div>
+      {/* ===== HEADER SEÇÃO ===== */}
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '2.25rem',
+          fontWeight: '700',
+          marginBottom: '0.5rem',
+          background: 'linear-gradient(135deg, #7c3aed 0%, #0891b2 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          🔍 Buscar Livros
+        </h1>
+        <p style={{ fontSize: '1rem', color: '#6b7280', marginBottom: 0 }}>
+          Explore nosso acervo e encontre o livro que você está procurando
+        </p>
       </div>
 
-      {/* Formulário de Busca */}
-      <div className="row mt-4">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-body">
-              <form onSubmit={handleSearch} className="row g-3">
-                <div className="col-md-8">
-                  <label htmlFor="search" className="form-label">Termo de busca</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="search"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Digite o título, autor, ISBN, editora ou gênero do livro"
-                    aria-describedby="searchHelp"
-                    required
-                    autoFocus
-                  />
-                  <div id="searchHelp" className="form-text">
-                    Você pode buscar por título do livro, nome do autor, ISBN, nome da editora ou gênero.
-                  </div>
-                </div>
-                <div className="col-md-4 d-flex align-items-end">
-                  <button type="submit" className="btn btn-primary btn-lg w-100" disabled={loading}>
-                    {loading ? (
-                      <>
-                        <div className="loading me-2"></div>
-                        Buscando...
-                      </>
-                    ) : (
-                      <>
-                        <i className="fas fa-search me-2"></i>
-                        Buscar Livros
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
+      {/* ===== FORMULÁRIO DE BUSCA ===== */}
+      <div style={{
+        background: '#ffffff',
+        borderRadius: '12px',
+        padding: '2rem',
+        marginBottom: '2rem',
+        border: '1px solid #e5e7eb',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+      }}>
+        <form onSubmit={handleSearch}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', alignItems: 'flex-end' }}>
+            <div>
+              <label htmlFor="search" style={{
+                fontWeight: '600',
+                color: '#111827',
+                marginBottom: '0.5rem',
+                display: 'block'
+              }}>
+                Termo de Busca
+              </label>
+              <input
+                type="text"
+                id="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Título, autor, ISBN, editora ou gênero..."
+                style={{
+                  width: '100%',
+                  border: '2px solid #e5e7eb',
+                  borderRadius: '12px',
+                  padding: '0.75rem 1rem',
+                  fontSize: '0.95rem',
+                  fontFamily: 'inherit',
+                  transition: 'all 150ms ease-in-out'
+                }} onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#7c3aed';
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(124, 58, 237, 0.1)';
+                }} onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#e5e7eb';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+                required
+                autoFocus
+              />
+              <p style={{ fontSize: '0.85rem', color: '#6b7280', marginTop: '0.5rem', marginBottom: 0 }}>
+                Dica: Você pode buscar por título, autor, ISBN, editora ou gênero
+              </p>
             </div>
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                background: loading ? '#d1d5db' : 'linear-gradient(135deg, #7c3aed 0%, #0891b2 100%)',
+                color: '#ffffff',
+                border: 'none',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '12px',
+                fontWeight: '700',
+                fontSize: '1rem',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                transition: 'all 250ms ease-in-out',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }} onMouseOver={(e) => {
+                if (!loading) {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(124, 58, 237, 0.4)';
+                }
+              }} onMouseOut={(e) => {
+                if (!loading) {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }
+              }}
+            >
+              {loading ? '⏳ Buscando...' : '🔍 Buscar'}
+            </button>
           </div>
-        </div>
+        </form>
       </div>
 
-      {/* Mensagem de Erro */}
+      {/* ===== MENSAGEM DE ERRO ===== */}
       {error && (
-        <div className="row mt-4">
-          <div className="col-12">
-            <div className="alert alert-danger" role="alert">
-              <i className="fas fa-exclamation-triangle me-2"></i>
-              {error}
-            </div>
-          </div>
+        <div style={{
+          background: 'rgba(239, 68, 68, 0.1)',
+          borderLeft: '4px solid #ef4444',
+          borderRadius: '8px',
+          padding: '1rem',
+          marginBottom: '2rem',
+          color: '#991b1b'
+        }}>
+          <p style={{ marginBottom: 0 }}>⚠️ {error}</p>
         </div>
       )}
 
-      {/* Resultados da Busca */}
+      {/* ===== RESULTADOS ===== */}
       {searchResults && (
-        <div className="row mt-4">
-          <div className="col-12">
-            <div className="card">
-              <div className="card-header">
-                <h3 className="mb-0">
-                  {searchTerm ? `Resultados para "${searchTerm}"` : 'Todos os Livros'}
-                  <small className="text-muted ms-2">
-                    ({searchResults.pagination.totalResults} livro(s) {searchTerm ? 'encontrado(s)' : 'no total'})
-                  </small>
-                </h3>
-              </div>
-              <div className="card-body">
-                {searchResults.livros.length === 0 ? (
-                  <div className="alert alert-info" role="alert">
-                    <i className="fas fa-info-circle me-2"></i>
-                    {searchTerm 
-                      ? `Nenhum livro encontrado para o termo "${searchTerm}". Tente buscar com outros termos ou verifique a ortografia.`
-                      : 'Nenhum livro cadastrado no sistema.'}
-                  </div>
-                ) : (
-                  <>
-                    <div className="table-responsive">
-                      <table className="table table-hover">
-                        <thead>
-                          <tr>
-                            <th>Título</th>
-                            <th>Autor</th>
-                            <th>Editora</th>
-                            <th>Ano</th>
-                            <th>Gênero</th>
-                            <th>Exemplares</th>
-                            <th>Disponíveis</th>
-                            <th>Ações</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {searchResults.livros.map((livro) => (
-                            <tr key={livro.li_cod}>
-                              <td>
-                                <strong>{livro.li_titulo}</strong>
-                                {livro.li_isbn && (
-                                  <>
-                                    <br />
-                                    <small className="text-muted">ISBN: {livro.li_isbn}</small>
-                                  </>
-                                )}
-                              </td>
-                              <td>{livro.autor?.au_nome || 'N/A'}</td>
-                              <td>{livro.editora?.ed_nome || 'N/A'}</td>
-                              <td>{livro.li_ano || 'N/A'}</td>
-                              <td>{livro.genero?.ge_genero || 'N/A'}</td>
-                              <td>
-                                <span className="badge bg-secondary">
-                                  {livro.total_exemplares}
-                                </span>
-                              </td>
-                              <td>
-                                {livro.exemplares_disponiveis > 0 ? (
-                                  <span className="badge bg-success">
-                                    {livro.exemplares_disponiveis} Disponível(is)
-                                  </span>
-                                ) : (
-                                  <span className="badge bg-danger">Indisponível</span>
-                                )}
-                              </td>
-                              <td>
-                                <Link
-                                  href={`/livro/${livro.li_cod}`}
-                                  className="btn btn-primary btn-sm"
-                                >
-                                  <i className="fas fa-eye me-1"></i>
-                                  Ver Detalhes
-                                </Link>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-
-                    {/* Paginação */}
-                    {searchResults.pagination.totalPages > 1 && (
-                      <nav aria-label="Navegação de páginas">
-                        <ul className="pagination justify-content-center">
-                          {searchResults.pagination.currentPage > 1 && (
-                            <li className="page-item">
-                              <button
-                                className="page-link"
-                                onClick={() => handlePageChange(searchResults.pagination.currentPage - 1)}
-                              >
-                                <i className="fas fa-chevron-left"></i> Anterior
-                              </button>
-                            </li>
-                          )}
-
-                          {Array.from({ length: searchResults.pagination.totalPages }, (_, i) => i + 1)
-                            .filter(page => {
-                              const current = searchResults.pagination.currentPage;
-                              return page >= current - 2 && page <= current + 2;
-                            })
-                            .map((page) => (
-                              <li
-                                key={page}
-                                className={`page-item ${page === searchResults.pagination.currentPage ? 'active' : ''}`}
-                              >
-                                <button
-                                  className="page-link"
-                                  onClick={() => handlePageChange(page)}
-                                >
-                                  {page}
-                                </button>
-                              </li>
-                            ))}
-
-                          {searchResults.pagination.currentPage < searchResults.pagination.totalPages && (
-                            <li className="page-item">
-                              <button
-                                className="page-link"
-                                onClick={() => handlePageChange(searchResults.pagination.currentPage + 1)}
-                              >
-                                Próximo <i className="fas fa-chevron-right"></i>
-                              </button>
-                            </li>
-                          )}
-                        </ul>
-                      </nav>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
+        <>
+          {/* Header de Resultados */}
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '12px',
+            padding: '1.5rem',
+            marginBottom: '1.5rem',
+            border: '1px solid #e5e7eb',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            <h2 style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: '1.5rem',
+              fontWeight: '700',
+              marginBottom: '0.5rem',
+              color: '#111827'
+            }}>
+              {searchTerm ? `📊 Resultados para "${searchTerm}"` : '📚 Todos os Livros'}
+            </h2>
+            <p style={{
+              fontSize: '0.95rem',
+              color: '#6b7280',
+              marginBottom: 0
+            }}>
+              {searchResults.pagination.totalResults} livro(s) {searchTerm ? 'encontrado(s)' : 'cadastrado(s)'}
+            </p>
           </div>
-        </div>
+
+          {searchResults.livros.length === 0 ? (
+            <div style={{
+              background: 'rgba(59, 130, 246, 0.1)',
+              borderLeft: '4px solid #3b82f6',
+              borderRadius: '8px',
+              padding: '2rem',
+              textAlign: 'center',
+              color: '#1e40af'
+            }}>
+              <p style={{ fontSize: '1.1rem', marginBottom: 0 }}>
+                ℹ️ {searchTerm
+                  ? `Nenhum livro encontrado para "${searchTerm}". Tente com outros termos.`
+                  : 'Nenhum livro cadastrado no sistema.'}
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Tabela de Livros */}
+              <div style={{
+                background: '#ffffff',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                marginBottom: '2rem',
+                overflowX: 'auto'
+              }}>
+                <table style={{
+                  width: '100%',
+                  borderCollapse: 'collapse'
+                }}>
+                  <thead>
+                    <tr style={{
+                      background: 'linear-gradient(90deg, #7c3aed 0%, #0891b2 100%)',
+                      color: '#ffffff'
+                    }}>
+                      <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Título</th>
+                      <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Autor</th>
+                      <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Editora</th>
+                      <th style={{ padding: '1rem', textAlign: 'center', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Ano</th>
+                      <th style={{ padding: '1rem', textAlign: 'left', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Gênero</th>
+                      <th style={{ padding: '1rem', textAlign: 'center', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total</th>
+                      <th style={{ padding: '1rem', textAlign: 'center', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Disponíveis</th>
+                      <th style={{ padding: '1rem', textAlign: 'center', fontWeight: '700', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchResults.livros.map((livro) => (
+                      <tr
+                        key={livro.li_cod}
+                        style={{
+                          borderBottom: '1px solid #e5e7eb',
+                          transition: 'background-color 150ms ease-in-out'
+                        }} onMouseOver={(e) => {
+                          e.currentTarget.style.background = 'rgba(124, 58, 237, 0.05)';
+                        }} onMouseOut={(e) => {
+                          e.currentTarget.style.background = 'transparent';
+                        }}
+                      >
+                        <td style={{ padding: '1rem', fontWeight: '600', color: '#111827' }}>
+                          {livro.li_titulo}
+                          {livro.li_isbn && (
+                            <div style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '0.25rem' }}>
+                              ISBN: {livro.li_isbn}
+                            </div>
+                          )}
+                        </td>
+                        <td style={{ padding: '1rem', color: '#374151' }}>{livro.autor?.au_nome || 'N/A'}</td>
+                        <td style={{ padding: '1rem', color: '#374151' }}>{livro.editora?.ed_nome || 'N/A'}</td>
+                        <td style={{ padding: '1rem', textAlign: 'center', color: '#374151' }}>{livro.li_ano || 'N/A'}</td>
+                        <td style={{ padding: '1rem', color: '#374151' }}>{livro.genero?.ge_genero || 'N/A'}</td>
+                        <td style={{ padding: '1rem', textAlign: 'center' }}>
+                          <span style={{
+                            background: 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)',
+                            color: '#ffffff',
+                            padding: '0.375rem 0.875rem',
+                            borderRadius: '16px',
+                            fontSize: '0.75rem',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            display: 'inline-block'
+                          }}>
+                            {livro.total_exemplares}
+                          </span>
+                        </td>
+                        <td style={{ padding: '1rem', textAlign: 'center' }}>
+                          {livro.exemplares_disponiveis > 0 ? (
+                            <span style={{
+                              background: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
+                              color: '#ffffff',
+                              padding: '0.375rem 0.875rem',
+                              borderRadius: '16px',
+                              fontSize: '0.75rem',
+                              fontWeight: '600',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.5px',
+                              display: 'inline-block'
+                            }}>
+                              ✓ {livro.exemplares_disponiveis}
+                            </span>
+                          ) : (
+                            <span style={{
+                              background: 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)',
+                              color: '#ffffff',
+                              padding: '0.375rem 0.875rem',
+                              borderRadius: '16px',
+                              fontSize: '0.75rem',
+                              fontWeight: '600',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.5px',
+                              display: 'inline-block'
+                            }}>
+                              ✕ 0
+                            </span>
+                          )}
+                        </td>
+                        <td style={{ padding: '1rem', textAlign: 'center' }}>
+                          <Link href={`/livro/${livro.li_cod}`} style={{
+                            background: 'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)',
+                            color: '#ffffff',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '8px',
+                            textDecoration: 'none',
+                            fontWeight: '600',
+                            fontSize: '0.85rem',
+                            transition: 'all 150ms ease-in-out',
+                            display: 'inline-block'
+                          }} onMouseOver={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(8, 145, 178, 0.4)';
+                          }} onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = 'none';
+                          }}>
+                            👁️ Ver
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Paginação */}
+              {searchResults.pagination.totalPages > 1 && (
+                <div style={{
+                  display: 'flex',
+                  gap: '0.5rem',
+                  justifyContent: 'center',
+                  marginBottom: '2rem',
+                  flexWrap: 'wrap'
+                }}>
+                  {searchResults.pagination.currentPage > 1 && (
+                    <button
+                      onClick={() => handlePageChange(searchResults.pagination.currentPage - 1)}
+                      style={{
+                        padding: '0.5rem 1rem',
+                        border: '2px solid #e5e7eb',
+                        borderRadius: '8px',
+                        background: '#ffffff',
+                        color: '#7c3aed',
+                        cursor: 'pointer',
+                        fontWeight: '600',
+                        transition: 'all 150ms ease-in-out'
+                      }} onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#7c3aed';
+                        e.currentTarget.style.color = '#ffffff';
+                        e.currentTarget.style.borderColor = '#7c3aed';
+                      }} onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#ffffff';
+                        e.currentTarget.style.color = '#7c3aed';
+                        e.currentTarget.style.borderColor = '#e5e7eb';
+                      }}
+                    >
+                      ← Anterior
+                    </button>
+                  )}
+
+                  {Array.from({ length: searchResults.pagination.totalPages }, (_, i) => i + 1)
+                    .filter(page => {
+                      const current = searchResults.pagination.currentPage;
+                      return page >= current - 2 && page <= current + 2;
+                    })
+                    .map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        style={{
+                          padding: '0.5rem 0.75rem',
+                          border: page === searchResults.pagination.currentPage ? 'none' : '2px solid #e5e7eb',
+                          borderRadius: '8px',
+                          background: page === searchResults.pagination.currentPage
+                            ? 'linear-gradient(135deg, #7c3aed 0%, #0891b2 100%)'
+                            : '#ffffff',
+                          color: page === searchResults.pagination.currentPage ? '#ffffff' : '#7c3aed',
+                          cursor: 'pointer',
+                          fontWeight: '600',
+                          minWidth: '36px',
+                          transition: 'all 150ms ease-in-out'
+                        }} onMouseOver={(e) => {
+                          if (page !== searchResults.pagination.currentPage) {
+                            e.currentTarget.style.background = 'rgba(124, 58, 237, 0.1)';
+                          }
+                        }} onMouseOut={(e) => {
+                          if (page !== searchResults.pagination.currentPage) {
+                            e.currentTarget.style.background = '#ffffff';
+                          }
+                        }}
+                      >
+                        {page}
+                      </button>
+                    ))}
+
+                  {searchResults.pagination.currentPage < searchResults.pagination.totalPages && (
+                    <button
+                      onClick={() => handlePageChange(searchResults.pagination.currentPage + 1)}
+                      style={{
+                        padding: '0.5rem 1rem',
+                        border: '2px solid #e5e7eb',
+                        borderRadius: '8px',
+                        background: '#ffffff',
+                        color: '#7c3aed',
+                        cursor: 'pointer',
+                        fontWeight: '600',
+                        transition: 'all 150ms ease-in-out'
+                      }} onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#7c3aed';
+                        e.currentTarget.style.color = '#ffffff';
+                        e.currentTarget.style.borderColor = '#7c3aed';
+                      }} onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#ffffff';
+                        e.currentTarget.style.color = '#7c3aed';
+                        e.currentTarget.style.borderColor = '#e5e7eb';
+                      }}
+                    >
+                      Próximo →
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </>
       )}
 
-      {/* Dicas de Busca */}
-      <div className="row mt-4">
-        <div className="col-12">
-          <div className="card bg-light">
-            <div className="card-body">
-              <h5><i className="fas fa-lightbulb me-2"></i>Dicas para uma busca mais eficiente:</h5>
-              <ul className="mb-0">
-                <li>Use palavras-chave do título do livro</li>
-                <li>Digite o nome completo ou sobrenome do autor</li>
-                <li>Para ISBN, digite apenas os números</li>
-                <li>Busque por gênero: Romance, Ficção, História, etc.</li>
-                <li>Use o nome da editora se souber</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      {/* ===== DICAS ===== */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%)',
+        borderRadius: '12px',
+        padding: '1.5rem',
+        border: '2px solid rgba(124, 58, 237, 0.2)',
+        marginTop: '2rem'
+      }}>
+        <h3 style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontSize: '1.125rem',
+          fontWeight: '700',
+          marginBottom: '1rem',
+          color: '#111827'
+        }}>
+          💡 Dicas para Uma Busca Eficiente
+        </h3>
+        <ul style={{
+          margin: 0,
+          paddingLeft: '1.5rem',
+          color: '#374151',
+          lineHeight: '1.8'
+        }}>
+          <li>Use palavras-chave do título do livro</li>
+          <li>Digite o nome completo ou sobrenome do autor</li>
+          <li>Para ISBN, digite apenas os números</li>
+          <li>Busque por gênero: Romance, Ficção, História, etc.</li>
+          <li>Use o nome da editora se souber</li>
+        </ul>
       </div>
     </Layout>
   );

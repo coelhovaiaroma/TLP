@@ -1,6 +1,6 @@
 /**
  * Layout.tsx - Componente de layout principal
- * Substitui header.php e footer.php do PHP original
+ * Novo design moderno - Mantém toda funcionalidade JavaScript intacta
  */
 
 import React, { useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ interface LayoutProps {
 export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: LayoutProps) {
   const router = useRouter();
   const [currentTime, setCurrentTime] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Atualizar horário
   useEffect(() => {
@@ -89,31 +90,38 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
   };
 
   return (
-    <>
-      {/* Barra de Acessibilidade Moderna */}
-      <div className="accessibility-bar bg-white border-bottom shadow-sm">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex justify-content-between align-items-center py-2">
-                <div className="accessibility-controls d-flex gap-2">
-                </div>
-                <div className="current-time text-muted fw-medium">
-                  <i className="fas fa-clock me-1"></i>
-                  <span>{currentTime}</span>
-                </div>
-              </div>
+    <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+      {/* ===== HEADER SUPERIOR ===== */}
+      <div className="navbar" style={{ background: '#ffffff', borderBottom: '1px solid #e5e7eb', padding: '0.75rem 0' }}>
+        <div className="container d-flex justify-content-between align-items-center">
+          <div className="d-flex align-items-center gap-3">
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', fontWeight: '500' }}>
+              📅 {currentTime}
             </div>
+          </div>
+          <div style={{ fontSize: '0.875rem', color: '#9ca3af' }}>
+            Sistema de Biblioteca Escolar
           </div>
         </div>
       </div>
 
-      {/* Navegação Principal */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary main-nav">
+      {/* ===== NAVBAR PRINCIPAL ===== */}
+      <nav className="navbar navbar-expand-lg" style={{
+        background: 'linear-gradient(90deg, #1f2937 0%, #111827 100%)',
+        borderBottom: '3px solid #7c3aed',
+        padding: '0'
+      }}>
         <div className="container">
-          <Link className="navbar-brand" href="/">
-            <i className="fas fa-book me-2"></i>
-            Biblioteca Escolar
+          <Link className="navbar-brand" href="/" style={{
+            fontSize: '1.5rem',
+            fontWeight: '800',
+            fontFamily: "'Poppins', sans-serif",
+            background: 'linear-gradient(90deg, #7c3aed 0%, #0891b2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            📚 Biblioteca
           </Link>
 
           <button
@@ -124,6 +132,7 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Alternar navegação"
+            style={{ borderColor: '#ffffff' }}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -131,38 +140,94 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/' ? 'active' : ''}`} href="/">
-                  <i className="fas fa-home me-1"></i> Início
+                <Link 
+                  className="nav-link" 
+                  href="/"
+                  style={{
+                    color: router.pathname === '/' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  🏠 Início
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/livros' ? 'active' : ''}`} href="/livros">
-                  <i className="fas fa-search me-1"></i> Buscar Livros
+                <Link 
+                  className="nav-link" 
+                  href="/livros"
+                  style={{
+                    color: router.pathname === '/livros' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/livros' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  🔍 Buscar Livros
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/emprestimos' ? 'active' : ''}`} href="/emprestimos">
-                  <i className="fas fa-hand-holding me-1"></i> Empréstimos
+                <Link 
+                  className="nav-link" 
+                  href="/emprestimos"
+                  style={{
+                    color: router.pathname === '/emprestimos' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/emprestimos' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  ✋ Empréstimos
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/devolucoes' ? 'active' : ''}`} href="/devolucoes">
-                  <i className="fas fa-undo me-1"></i> Devoluções
+                <Link 
+                  className="nav-link" 
+                  href="/devolucoes"
+                  style={{
+                    color: router.pathname === '/devolucoes' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/devolucoes' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  ↩️ Devoluções
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/utentes' ? 'active' : ''}`} href="/utentes">
-                  <i className="fas fa-users me-1"></i> Utentes
+                <Link 
+                  className="nav-link" 
+                  href="/utentes"
+                  style={{
+                    color: router.pathname === '/utentes' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/utentes' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  👥 Utentes
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname === '/relatorios' ? 'active' : ''}`} href="/relatorios">
-                  <i className="fas fa-chart-bar me-1"></i> Relatórios
+                <Link 
+                  className="nav-link" 
+                  href="/relatorios"
+                  style={{
+                    color: router.pathname === '/relatorios' ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname === '/relatorios' ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  📊 Relatórios
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${router.pathname.startsWith('/admin') ? 'active' : ''}`} href="/admin">
-                  <i className="fas fa-cog me-1"></i> Administração
+                <Link 
+                  className="nav-link" 
+                  href="/admin"
+                  style={{
+                    color: router.pathname.startsWith('/admin') ? '#06b6d4' : '#ffffff',
+                    fontWeight: router.pathname.startsWith('/admin') ? '600' : '500',
+                    padding: '0.5rem 1rem'
+                  }}
+                >
+                  ⚙️ Admin
                 </Link>
               </li>
             </ul>
@@ -170,12 +235,19 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
             <ul className="navbar-nav">
               <li className="nav-item">
                 <button
-                  className="nav-link btn btn-link"
+                  className="nav-link"
                   onClick={showHelp}
                   title="Ajuda"
-                  style={{ border: 'none', background: 'none' }}
+                  style={{
+                    border: 'none',
+                    background: 'none',
+                    color: '#ffffff',
+                    fontWeight: '500',
+                    padding: '0.5rem 1rem',
+                    cursor: 'pointer'
+                  }}
                 >
-                  <i className="fas fa-question-circle me-1"></i> Ajuda
+                  ❓ Ajuda
                 </button>
               </li>
             </ul>
@@ -183,39 +255,78 @@ export default function Layout({ children, pageTitle = 'Biblioteca Escolar' }: L
         </div>
       </nav>
 
-      {/* Container Principal */}
-      <main className="main-content">
-        <div className="container-fluid py-4">
+      {/* ===== CONTEÚDO PRINCIPAL ===== */}
+      <main className="flex-grow-1" style={{ padding: '2rem 0', background: 'linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%)' }}>
+        <div className="container">
           {children}
         </div>
       </main>
 
-      {/* Rodapé */}
-      <footer className="footer bg-light mt-5">
+      {/* ===== FOOTER ===== */}
+      <footer style={{
+        background: 'linear-gradient(90deg, #1f2937 0%, #111827 100%)',
+        color: '#ffffff',
+        marginTop: 'auto',
+        padding: '2rem 0',
+        borderTop: '3px solid #7c3aed'
+      }}>
         <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <h5>Sistema de Biblioteca Escolar</h5>
-              <p>Desenvolvido para facilitar o acesso e gestão de livros na biblioteca.</p>
+          <div className="row" style={{ marginBottom: '1.5rem' }}>
+            <div className="col-md-4" style={{ marginBottom: '1.5rem' }}>
+              <h6 style={{ 
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: '700',
+                marginBottom: '1rem',
+                color: '#ffffff'
+              }}>
+                📚 Biblioteca Escolar
+              </h6>
+              <p style={{ fontSize: '0.9rem', color: '#d1d5db', lineHeight: '1.6' }}>
+                Sistema moderno de gestão de acervo bibliotecário escolar
+              </p>
             </div>
-            <div className="col-md-6 text-md-end">
-              <h6>Contato</h6>
-              <p>
-                <i className="fas fa-envelope me-1"></i> biblioteca@escola.edu<br />
-                <i className="fas fa-phone me-1"></i> (11) 1234-5678
+            <div className="col-md-4" style={{ marginBottom: '1.5rem' }}>
+              <h6 style={{ 
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: '700',
+                marginBottom: '1rem',
+                color: '#ffffff'
+              }}>
+                🔗 Navegação
+              </h6>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li><Link href="/" style={{ color: '#0891b2', textDecoration: 'none', fontSize: '0.9rem' }}>Página Inicial</Link></li>
+                <li><Link href="/livros" style={{ color: '#0891b2', textDecoration: 'none', fontSize: '0.9rem' }}>Buscar Livros</Link></li>
+                <li><Link href="/admin" style={{ color: '#0891b2', textDecoration: 'none', fontSize: '0.9rem' }}>Administração</Link></li>
+              </ul>
+            </div>
+            <div className="col-md-4">
+              <h6 style={{ 
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: '700',
+                marginBottom: '1rem',
+                color: '#ffffff'
+              }}>
+                ✉️ Contato
+              </h6>
+              <p style={{ fontSize: '0.9rem', color: '#d1d5db', marginBottom: '0.5rem' }}>
+                📧 biblioteca@escola.edu
+              </p>
+              <p style={{ fontSize: '0.9rem', color: '#d1d5db' }}>
+                📞 (11) 1234-5678
               </p>
             </div>
           </div>
-          <hr />
-          <div className="row">
-            <div className="col-12 text-center">
-              <p className="mb-0">
-                &copy; {new Date().getFullYear()} Biblioteca Escolar. Todos os direitos reservados.
-              </p>
-            </div>
+          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem', textAlign: 'center' }}>
+            <p style={{ fontSize: '0.85rem', color: '#9ca3af', marginBottom: 0 }}>
+              &copy; {new Date().getFullYear()} Biblioteca Escolar. Todos os direitos reservados.
+            </p>
+            <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
+              Design moderno | Desenvolvido com ❤️
+            </p>
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
