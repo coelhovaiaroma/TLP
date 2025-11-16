@@ -169,7 +169,7 @@ a:hover {
 
 .page-subtitle {
     font-size: 1rem;
-    color: var(--neutral-500);
+    color: var(--neutral-600);
     margin-bottom: var(--spacing-lg);
 }
 
@@ -729,7 +729,7 @@ footer .footer-bottom {
 }
 
 .text-muted {
-    color: var(--neutral-500);
+    color: var(--neutral-600);
 }
 
 .text-danger {
@@ -750,6 +750,26 @@ footer .footer-bottom {
 
 .text-secondary {
     color: var(--secondary);
+}
+
+/* Card title (títulos dentro de cards) */
+.card-title {
+    color: var(--neutral-900);
+    font-weight: 600;
+}
+
+/* Display numbers and statistics */
+.display-4,
+.display-3,
+.display-2,
+.display-1 {
+    color: var(--neutral-900);
+    font-weight: 700;
+}
+
+/* Ensure all paragraphs and text have good contrast */
+p, li, td, th, span, label {
+    color: var(--neutral-800);
 }
 
 .mt-0 { margin-top: 0; }
@@ -879,6 +899,12 @@ footer .footer-bottom {
    ACESSIBILIDADE
    ============================================================================ */
 
+/* Spinner loading (text inside spinners) */
+.spinner-border {
+    border-color: var(--primary) !important;
+}
+
+.visually-hidden,
 .sr-only {
     position: absolute;
     width: 1px;
@@ -889,6 +915,7 @@ footer .footer-bottom {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+    color: var(--neutral-800) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
