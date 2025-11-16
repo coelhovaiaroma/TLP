@@ -188,7 +188,7 @@ export default function UtentesPage() {
     <Layout pageTitle="Gestão de Utentes">
       <div className="row">
         <div className="col-12">
-          <h1 className="page-title">Gestão de Utentes</h1>
+          <h1 className="page-title" style={{ color: '#000000' }}>Gestão de Utentes</h1>
           <p className="page-subtitle">Cadastre e gerencie utentes da biblioteca</p>
         </div>
       </div>
