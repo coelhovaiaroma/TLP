@@ -221,10 +221,10 @@ O projeto inclui APIs REST completas para todas as operações:
 
 2. **Configure as variáveis de ambiente no Vercel:**
    ```
-   SUPABASE_URL=https://your-project-id.supabase.co
-   SUPABASE_ANON_KEY=your-anon-key-here
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+   SUPABASE_URL=https://cczhqlolidfewgoejqhq.supabase.co
+   SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjemhxbG9saWRmZXdnb2VqcWhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDUyMDMsImV4cCI6MjA3ODg4MTIwM30.SyRztoZ8IJ76mmCYsYuluxlM6XNP8plPe0hPqrpTFZY
+   NEXT_PUBLIC_SUPABASE_URL=https://cczhqlolidfewgoejqhq.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjemhxbG9saWRmZXdnb2VqcWhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDUyMDMsImV4cCI6MjA3ODg4MTIwM30.SyRztoZ8IJ76mmCYsYuluxlM6XNP8plPe0hPqrpTFZY
    ```
 
 3. **Deploy automático:**

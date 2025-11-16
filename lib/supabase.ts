@@ -71,9 +71,12 @@ export interface CodigoPostal {
   cod_localidade: string;
 }
 
+
 // Configuração do cliente Supabase
-const supabaseUrl = 'https://fhlbhqrqdbifyjpldzun.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZobGJocXJxZGJpZnlqcGxkenVuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwNDQ3NTgsImV4cCI6MjA3ODYyMDc1OH0.dh_92vFL_JiuYgKZbhfMKNbUV_G9x1iGVv3rBPTaaTE';
+// Valores atualizados conforme informado pelo usuário. Preferimos usar
+// variáveis de ambiente quando disponíveis para segurança.
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://cczhqlolidfewgoejqhq.supabase.co';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjemhxbG9saWRmZXdnb2VqcWhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzMDUyMDMsImV4cCI6MjA3ODg4MTIwM30.SyRztoZ8IJ76mmCYsYuluxlM6XNP8plPe0hPqrpTFZY';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 

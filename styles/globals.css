@@ -85,7 +85,8 @@ body {
     font-family: var(--font-primary);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--neutral-700);
+    /* Tornar o texto um pouco mais claro para melhor leitura */
+    color: var(--neutral-600);
     background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
     min-height: 100vh;
     transition: background-color var(--transition-base);
@@ -99,7 +100,8 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-secondary);
     font-weight: 700;
     line-height: 1.2;
-    color: var(--neutral-900);
+    /* Cabeçalhos menos contrastantes — tom levemente mais claro */
+    color: var(--neutral-800);
 }
 
 h1 {
