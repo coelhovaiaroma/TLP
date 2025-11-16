@@ -256,14 +256,23 @@ a:hover {
     border: none;
 }
 
+.card-header h5,
+.card-header h6 {
+    color: #ffffff;
+    font-weight: 700;
+    margin: 0;
+}
+
 .card-body {
     padding: var(--spacing-lg);
+    color: var(--neutral-800);
 }
 
 .card-footer {
     background: var(--neutral-50);
     border-top: 1px solid var(--neutral-200);
     padding: var(--spacing-md);
+    color: var(--neutral-700);
 }
 
 /* ============================================================================
@@ -392,6 +401,7 @@ a:hover {
     font-size: 0.95rem;
     transition: all var(--transition-fast);
     background: #ffffff;
+    color: var(--neutral-800);
 }
 
 .form-control:focus,
@@ -399,6 +409,7 @@ a:hover {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
     outline: none;
+    color: var(--neutral-900);
 }
 
 .form-control::placeholder {
@@ -406,7 +417,7 @@ a:hover {
 }
 
 .form-text {
-    color: var(--neutral-500);
+    color: var(--neutral-600);
     font-size: 0.875rem;
 }
 
@@ -440,6 +451,7 @@ a:hover {
     background: #ffffff;
     border-radius: var(--radius-lg);
     overflow: hidden;
+    color: var(--neutral-800);
 }
 
 .table thead {
@@ -454,6 +466,7 @@ a:hover {
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     border: none;
+    color: #ffffff;
 }
 
 .table tbody tr {
@@ -472,6 +485,7 @@ a:hover {
 .table tbody td {
     padding: var(--spacing-md) var(--spacing-lg);
     vertical-align: middle;
+    color: var(--neutral-700);
 }
 
 /* ============================================================================
@@ -552,26 +566,31 @@ a:hover {
 .badge-primary {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: #ffffff;
+    font-weight: 700;
 }
 
 .badge-secondary {
     background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
     color: #ffffff;
+    font-weight: 700;
 }
 
 .badge-success {
     background: var(--success);
     color: #ffffff;
+    font-weight: 700;
 }
 
 .badge-danger {
     background: var(--danger);
     color: #ffffff;
+    font-weight: 700;
 }
 
 .badge-warning {
     background: var(--warning);
     color: #ffffff;
+    font-weight: 700;
 }
 
 /* ============================================================================
@@ -657,6 +676,7 @@ footer .footer-bottom {
     border: none;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-xl);
+    background: #ffffff;
 }
 
 .modal-header {
@@ -666,12 +686,32 @@ footer .footer-bottom {
     padding: var(--spacing-lg);
 }
 
+.modal-header h5,
+.modal-header .modal-title {
+    color: #ffffff;
+    font-weight: 700;
+}
+
 .modal-header .btn-close {
     filter: brightness(0) invert(1);
 }
 
 .modal-body {
     padding: var(--spacing-lg);
+    color: var(--neutral-800);
+}
+
+.modal-body h4,
+.modal-body h5,
+.modal-body h6 {
+    color: var(--neutral-900);
+    font-weight: 600;
+}
+
+.modal-body p,
+.modal-body li,
+.modal-body strong {
+    color: var(--neutral-700);
 }
 
 .modal-footer {
